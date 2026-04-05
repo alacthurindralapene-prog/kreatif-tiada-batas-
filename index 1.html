@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <title>Si Gembul Gila - Ebook Interaktif 😂</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Comic Sans MS', cursive; 
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            overflow-x: hidden;
+            cursor: pointer;
+        }
+        .page { 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center; 
+            padding: 20px; 
+            animation: slideIn 1s ease-in-out;
+            position: relative;
+        }
+        @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+        .gembul { font-size: 80px; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-20px); } 60% { transform: translateY(-10px); } }
+        h1 { font-size: 3em; color: #fff; text-shadow: 3px 3px #000; margin: 20px 0; }
+        .speech { background: #fff; border-radius: 20px; padding: 20px; margin: 20px; font-size: 1.5em; box-shadow: 0 10px 20px rgba(0,0,0,0.3); animation: pop 0.5s; }
+        @keyframes pop { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+        .swipe { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); color: white; font-size: 2em; animation: arrow 2s infinite; }
+        @keyframes arrow { 0% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-10px); } }
+        audio { display: none; }
+        button { background: #ff4757; color: white; border: none; padding: 15px 30px; font-size: 1.2em; border-radius: 50px; cursor: pointer; margin: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        button:hover { transform: scale(1.1); }
+    </style>
+</head>
+<body>
+    <!-- HALAMAN 1: COVER -->
+    <div class="page" id="page1">
+        <h1>🌟 SI GEMBUL GILA 🌟</h1>
+        <div class="gembul">👦🕺🍡</div>
+        <div class="speech">Shinchan Indo Ngakak!<br>Tap "MULAI PETUALANGAN!"</div>
+        <button onclick="nextPage()">🚀 MULAI PETUALANGAN 😱</button>
+        <div class="swipe">👉 SWIPE / TAP 👈</div>
+    </div>
+
+    <!-- HALAMAN 2: BAB 1 -->
+    <div class="page" id="page2" style="display:none;">
+        <h1>🐣 BAB 1: Lahir Gila!</h1>
+        <div class="gembul">👶😭🍡</div>
+        <div class="speech">"CILOK MANA BUUU?! 😆"<br>Bu RT: "MONSTER CILOK?!"</div>
+        <button onclick="playSound(1); nextPage();">🔊 Denger Gembul Jerit!</button>
+        <div class="swipe">→ AYAM RAKSASA!</div>
+    </div>
+
+    <!-- HALAMAN 3: BAB 2 -->
+    <div class="page" id="page3" style="display:none;">
+        <h1>🐔 BAB 2: Vs Ayam!</h1>
+        <div class="gembul">👦🕺💥🐔🚀</div>
+        <div class="speech">"JOGET YUK AYAM! 🪩"<br>Rumah BOOM! 😂</div>
+        <button onclick="playSound(2)">💥 BOOM PARTY!</button>
+        <div class="swipe">→ SEKOLAH DISKOTEK!</div>
+    </div>
+
+    <!-- HALAMAN 4: BAB 3 -->
+    <div class="page" id="page4" style="display:none;">
+        <h1>🎓 BAB 3: Sekolah Kolplay!</h1>
+        <div class="gembul">👦🎤🕺👩‍🏫💃</div>
+        <div class="speech">"1+1=CILOK Bu! 🧮🕺"<br>Guru goyang pinggul!</div>
+        <button onclick="playSound(3)">🎶 DANGDUT BEAT!</button>
+        <div class="swipe">→ CINTA CILOK!</div>
+    </div>
+
+    <!-- HALAMAN 5: BAB 4 -->
+    <div class="page" id="page5" style="display:none;">
+        <h1>💕 BAB 4: Pacar Chaos!</h1>
+        <div class="gembul">👦🌺👧🍡🌊</div>
+        <div class="speech">"Dara = Cilok pedes! ❤️"<br>Banjir cilok manis!</div>
+        <button onclick="playSound(4)">💕 CINTA MONKEY!</button>
+        <div class="swipe">→ FINALE EPIC!</div>
+    </div>
+
+    <!-- HALAMAN 6: BAB 5 -->
+    <div class="page" id="page6" style="display:none;">
+        <h1>👑 BAB 5: Cilokland!</h1>
+        <div class="gembul">👦👑🕺🐔👽🎉</div>
+        <div class="speech">"Gembul RAJA! 🏰"<br>Alien dangdut party! 👽🪩</div>
+        <button onclick="playSound(5)">🎉 SHARE KE TEMEN!</button>
+        <div style="margin-top:30px; font-size:1.2em;">Mau Vol.2? Refresh! 😈</div>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        const pages = document.querySelectorAll('.page');
+        
+        function nextPage() {
+            pages[currentPage-1].style.display = 'none';
+            currentPage++;
+            if (currentPage <= 6) pages[currentPage-1].style.display = 'flex';
+        }
+        
+        // Touch/Swipe support
+        let startX = 0;
+        document.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+        document.addEventListener('touchend', e => {
+            let endX = e.changedTouches[0].clientX;
+            if (startX - endX > 50) nextPage(); // Swipe left
+        });
+        
+        // Keyboard
+        document.addEventListener('keydown', e => { if (e.key == 'ArrowRight') nextPage(); });
+        
+        function playSound(page) {
+            // Real audio bisa ditambah <audio> tag
+            const sounds = ['cilok.mp3', 'boom.mp3', 'dangdut.mp3', 'cinta.mp3', 'party.mp3'];
+            console.log(`Main suara bab ${page}: ${sounds[page-1]}`);
+            // Tambah speech synthesis
+            const msg = new SpeechSynthesisUtterance(['Cilok!', 'Boom ayam!', 'Joget sekolah!', 'Cinta cilok!', 'Party raja!'][page-1]);
+            msg.lang = 'id-ID';
+            speechSynthesis.speak(msg);
+        }
+    </script>
+</body>
+</html>
